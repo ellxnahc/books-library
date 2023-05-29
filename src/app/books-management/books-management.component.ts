@@ -37,16 +37,12 @@ export class BooksManagementComponent implements OnInit{
   displayBook:BookData[] = [];
 
   $addNewSubscribe : Subscription = Subscription.EMPTY;
-  constructor( 
+  constructor(
     private booksManagementService:BooksManagementService,
     private router:Router,
     private formBuilder: FormBuilder,
-  ) { 
+  ) {
   }
-
-  
-    
-  
 
   ngOnInit(){
     this.searchControl = this.formBuilder.control("");
@@ -80,13 +76,13 @@ export class BooksManagementComponent implements OnInit{
 
     }
 
-  
+
   openDetail(id:string){
     this.router.navigate(['/admin/books-management/book-details',id]);
   }
 
   ngOnDestroy(){}
-  
+
   addBook(form:any){
     this.isLoading = true;
     this.book = {
@@ -108,7 +104,7 @@ export class BooksManagementComponent implements OnInit{
   }
 
   fetchData(){
-    
-    
+
+
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BookPostData, BooksData } from '../model/book.model';
+import { BookDisplayDetail, BookPostData, BooksData } from '../model/book.model';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,9 @@ export class BooksManagementService {
 
   addNewBook(book: BookPostData) {
     return this.httpClient.post(this.bookUrl, book);
+  }
+  editBook(book: BookDisplayDetail) {
+    return this.httpClient.patch(this.bookUrl, book);
   }
 
   fetchBook() {

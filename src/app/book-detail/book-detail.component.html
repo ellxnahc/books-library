@@ -20,7 +20,7 @@
                                     <button class="ms-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#signInModal" *ngIf="role===3">Borrow</button>
                                     <button class="ms-auto btn btn-primary" *ngIf="role===2">Borrow</button>
                                     <button class="ms-auto btn btn-secondary" *ngIf="role===1">Delete</button>
-                                    <button class="ms-3 btn btn-primary" *ngIf="role===1">Edit</button>
+                                    <button class="ms-3 btn btn-primary" *ngIf="role===1" data-bs-toggle="modal" data-bs-target="#editBookModal">Edit</button>
                                 </div>
                             </div>
                             </div>
@@ -31,5 +31,58 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modalBackground">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addBookModalLabel">Edit Book</h5>
+                    <button
+                    type="button"
+                    class="close black"
+                    aria-label="Close"
+                    data-bs-dismiss="modal"
+                    id = "closeEditBookModal"
+                    >
+                    <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="card px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="editBook(f.value)">
+                            <!-- Book Title -->
+                                <label class="form-label pb-1" for="inputTitle">Book Title</label>
+                                <input [(ngModel)]="bookDisplayDetail.title" type="text" id="inputTitle" name="inputTitle" class="form-control" />
+                                <br>
+                            <!-- Category input -->
+                                <label class="form-label pb-1" for="inputCategory">Choose Config Service Changes to add:</label>
+                                <div class="d-flex justify-content-end">
+                                    <select [(ngModel)]="bookDisplayDetail.category" id="inputCategory" name="inputCategory" class="form-control" aria-placeholder="selected-path" >
+                                        <option *ngFor="let inside of category | keyvalue; let i=index" [ngValue]="inside.value">{{inside.value}}</option>
+                                    </select>
+                                </div>
+                            <!-- Writer input -->
+                                <label class="form-label pb-1" for="inputWriter">Writer Name</label>
+                                <input [(ngModel)]="bookDisplayDetail.writer" type="text" id="inputWriter" name="inputWriter" class="form-control"/>
+                                <br>
+                            <!-- Picture input -->
+                                <label class="form-label pb-1" for="inputPicture">Picture (url)</label>
+                                <input [(ngModel)]="bookDisplayDetail.picture" type="text" id="inputPicture" name="inputPicture" class="form-control"/>
+                                <br>
+                            <!-- Commit message input-->
+                                <label class="form-label pb-1" for="inputDescription">Config File Content:</label>
+                                <textarea [(ngModel)]="bookDisplayDetail.description" id="inputDescription" name="inputDescription"  rows="4" col="5" class="form-control"></textarea>
+                                <br>
+                            <!-- Submit button -->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                    Close
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Edit</button>
+                                <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <app-app-loading *ngIf="isLoading"></app-app-loading>

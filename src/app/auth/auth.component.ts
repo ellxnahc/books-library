@@ -60,7 +60,7 @@ export class AuthComponent {
             const closeModal = document.getElementById('closeSignInModal');
             closeModal?.click();
             this.user=localStorage.getItem('userData');
-            if(JSON.parse(this.user).email=="knowryadmin@gmail.com"){
+            if(JSON.parse(this.user).email=="knowryadmin@gmail.com" || JSON.parse(this.user).email=="aewinj@gmail.com"){
               this.authService.userRole=UserRole.Admin;
             }else{
               this.authService.userRole=UserRole.NormalUser;

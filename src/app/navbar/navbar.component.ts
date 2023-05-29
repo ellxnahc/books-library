@@ -30,12 +30,11 @@ export class NavbarComponent implements OnInit {
   isAdmin:boolean=false;
   isGuess:boolean=false;
   ngOnInit(){
-    console.log(this.isLogin);
     document.body.classList.toggle("light-theme");
   }
 
   ngDoCheck(){
-    
+
     this.isUser=false;
     this.isAdmin=false;
     this.isGuess=false;
@@ -45,13 +44,14 @@ export class NavbarComponent implements OnInit {
     // console.log(JSON.parse(this.obj).email);
     if(this.obj===null){
       this.isGuess=true;
-    }else if(JSON.parse(this.obj).email==="knowryadmin@gmail.com"){
+      this.isLogin= false;
+    }else if(JSON.parse(this.obj).email==="knowryadmin@gmail.com" || JSON.parse(this.obj).email==="aewinj@gmail.com"){
       this.isAdmin=true;
+      this.isLogin= true
     }else{
       this.isUser=true;
+      this.isLogin= true
     }
-    if(this.obj===null)this.isLogin= false;
-    else if(this.obj)this.isLogin= true;
   }
 
   logOut(){

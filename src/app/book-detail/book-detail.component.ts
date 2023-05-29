@@ -21,6 +21,8 @@ export class BookDetailComponent {
 
   role:number=3;
 
+  category:string[]=['Economy','Marketing','Novel','Computer'];
+
   constructor(private booksManagementService:BooksManagementService , private route:ActivatedRoute, private authService:AuthService){}
 
   ngOnInit(){
@@ -44,7 +46,32 @@ export class BookDetailComponent {
         borowedStatus:data.borowedStatus
       };
     })
-    
+
+  }
+
+  editBook(form:any){
+    this.isLoading = true;
+    this.bookDisplayDetail = {
+      title: form.inputTitle,
+      category: form.inputCategory,
+      writer: form.inputWriter,
+      picture: form.inputPicture,
+      description: form.inputDescription,
+      borowedStatus: false
+    }
+    this.booksManagementService.editBook(this.bookDisplayDetail).subscribe(data=>{
+      this.isLoading = false;
+      this.ngOnDestroy();
+      const closeModal = document.getElementById('closeEditBookModal');
+      closeModal?.click();
+      this.fetchData();
+    });
+
+  }
+
+  fetchData(){
+
+
   }
 
   ngOnDestroy(){
