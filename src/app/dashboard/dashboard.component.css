@@ -1,0 +1,80 @@
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+    margin-left:0.5px;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-color);
+  }
+  
+  .has-search{
+    width: 25%;
+  }
+  .has-search .form-control-feedback {
+  border-radius: none;
+    position: absolute;
+    /* z-index: 2; */
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: var(--main-color);
+  }
+  .hover-edit {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5%;
+    margin: 15px;
+    text-align: center;
+    position: relative;
+    color: var(--main-color-text);
+    background-color: var(--secondary-background-color);;
+    transition: 300ms;
+    box-shadow: var(--box-shadow-color);
+  }
+  .card-text{
+    height: 96px;
+}
+.card{
+    color: var(--main-color-text);
+    background-color: var(--secondary-background-color);
+    border: none;
+}
+
+.book-card{
+  box-shadow: var(--box-shadow-color);
+}
+
+
+form{
+    padding: none;
+}
+
+  .form-control{
+    border-radius: 0;
+    color: var(--main-color-text)!important;
+    background-color: var(--secondary-background-color)!important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: var(--main-color);
+    box-shadow: none;
+  }
+  
+  .form-control:focus{
+    color: var(--main-color-text)!important;
+    background-color: var(--secondary-background-color)!important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+  
+  .form-control .ng-touched .ng-dirty .ng-valid{
+    color: var(--main-color-text)!important;
+    background-color: var(--secondary-background-color)!important;
+    border: none;
+    box-shadow: none;
+  }
+  

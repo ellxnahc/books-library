@@ -1,0 +1,35 @@
+<div  *ngIf="!isLoading">
+    <div class="container" *ngIf="!isLoading">
+        <div class="d-flex justify-content-between">
+            <div>
+                <div class="pt-2 mt-5">
+                    <div class="shadow-risen card container rounded">
+                        <div class="row">
+                            <img src="{{bookDisplayDetail.picture}}" style=" object-fit: contain;"
+                                    class="card-img-left col-4" style="height:32rem; width: auto;" alt="..."/>
+                            <div class="card-body col-8">
+                                <div class="card-body">
+                                    <h3 class="card-title title">{{bookDisplayDetail.title}}</h3>
+                                    <div class="card-text">
+                                        <h5 class=>{{bookDisplayDetail.category }} </h5>
+                                        <b class=>{{bookDisplayDetail.writer }} </b>
+                                        <br>
+                                        <p>{{bookDisplayDetail.description }} </p>
+                                    </div>
+                                <div class="d-flex">
+                                    <button class="ms-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#signInModal" *ngIf="role===3">Borrow</button>
+                                    <button class="ms-auto btn btn-primary" *ngIf="role===2">Borrow</button>
+                                    <button class="ms-auto btn btn-secondary" *ngIf="role===1">Delete</button>
+                                    <button class="ms-3 btn btn-primary" *ngIf="role===1">Edit</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<app-app-loading *ngIf="isLoading"></app-app-loading>

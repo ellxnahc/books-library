@@ -1,0 +1,44 @@
+<div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modalBackground">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="signInModalLabel" *ngIf="registered">Login</h5>
+                  <h5 class="modal-title" id="signInModalLabel" *ngIf="!registered">Sign Up</h5>
+                  <button
+                  type="button"
+                  class="close black"
+                  aria-label="Close"
+                  data-bs-dismiss="modal"
+                  id = "closeSignInModal"
+                  >
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+          <div class="authAlert">
+            <alert  type="danger" dismissOnTimeout="3000" *ngIf="errorMsg!=''">{{ errorMsg }}</alert>
+          </div>
+              <form #authForm="ngForm" class="card px-2 pt-1 pb-3 d-flex">
+                  <div class="form-group mb-3">
+                    <label for="email" class="form-label pb-1">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" ngModel required email>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" ngModel required minlength="6">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid" (click)="onSubmit(authForm)" *ngIf="registered && !isLoading">Login</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid" (click)="onSubmit(authForm)" *ngIf="!registered  && !isLoading">Signup</button>
+                  <button type="submit" class="btn btn-primary" [disabled]="true" (click)="onSubmit(authForm)" *ngIf="isLoading">Loading...</button>
+                  <br><br>
+                  <span style="font-size: small;" *ngIf="registered">Doesn't have an account? <a style="color: blue; text-decoration: underline;" (click)="registered=false">Sign Up</a></span>
+                  <span style="font-size: small;" *ngIf="!registered">Already have an account? <a style="color: blue; text-decoration: underline;" (click)="registered=true">Login</a></span>
+              </form>
+        </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,57 @@
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<!-- <nav class="navbar navbar-expand-custom navbar-mainbg">
+  <a class="navbar-brand navbar-logo ms-3" href="#">Library Management</a>
+  <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <i class="fas fa-bars text-white"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <div class="justify-content-between d-flex me-3">
+          <li>
+              <a routerLinkActive="backgroundBtn" type="button" routerLink="/login" [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-sign-in"></i>Login</a>
+          </li>
+          <li>
+              <a routerLinkActive="backgroundBtn" type="button" routerLink="/register" [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-id-card"></i>Register</a>
+          </li>
+        </div>
+      </ul>
+  </div>
+</nav> -->
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+  <a class="navbar-brand navbar-logo ms-3" href="#">Library Management</a>
+  <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <i class="fas fa-bars text-white"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <div class="justify-content-between d-flex me-3">
+          <li *ngIf="!isLogin&&isGuess">
+              <a type="button" data-bs-toggle="modal" data-bs-target="#signInModal"><i class="fa fa-sign-in"></i>Sign In</a>
+          </li>
+          <li *ngIf="isLogin&&(isAdmin||isUser)">
+              <a routerLinkActive="backgroundBtn" type="button" routerLink="/admin/books-management" [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-sign-in"></i>Books</a>
+          </li>
+          <li *ngIf="isLogin&&(isAdmin||isUser)">
+              <a routerLinkActive="backgroundBtn" type="button" [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-id-card"></i>Service</a>
+          </li>
+          <li *ngIf="isLogin&&isAdmin">
+              <a routerLinkActive="backgroundBtn" type="button" [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-id-card"></i>Category</a>
+          </li>
+          <li *ngIf="isLogin&&isAdmin">
+              <a routerLinkActive="backgroundBtn" type="button"  [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-id-card"></i>User</a>
+          </li>
+          <li *ngIf="isLogin">
+              <a routerLinkActive="backgroundBtn" type="button" (click)="logOut()" [routerLinkActiveOptions] ="{exact:
+                true}"><i class="fa fa-id-card"></i>Logout</a>
+          </li>
+        </div>
+      </ul>
+  </div>
+</nav>
+<app-auth></app-auth>

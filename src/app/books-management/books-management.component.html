@@ -1,0 +1,101 @@
+<div class="modal" class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <div class="form-group has-search ms-3 float-left my-auto">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input class ="form-control" type="text" value="" [formControl]="searchControl"/>
+        </div>
+        <div>
+            <button type="button" class="btn hover-edit" data-bs-toggle="modal" data-bs-target="#addBookModal"><i class="fas fa-plus"></i>&nbsp; Add Book</button>
+        </div>
+    </div> 
+</div>
+    <div class="container" *ngIf="!isLoading">
+        <div class="row justify-content-center">
+            <div *ngFor="let book of displayBook;let i = index" class="col-auto">
+                <div *ngIf="i%4===3" class="w-100">
+                </div>
+                    <div class="pt-2">
+                        <div class="shadow-risen card book-card rounded  flex-column" style="width: 14rem;">
+                            <div class="col align-center">
+                                <img src="{{book.picture}}" style="height: 14rem; object-fit: contain;"
+                                    class="card-img-top align-center" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <h5 class="card-title title">{{book.title}}</h5>
+                                    <p class="card-text">{{book.category }} </p>
+                                </div>
+                                <div class="d-flex">
+                                    <button class="btn btn-primary col" (click)="openDetail(book.id)">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <br>
+            </div>
+        </div>
+</div>
+    <div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modalBackground">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addBookModalLabel">Add Book</h5>
+                        <button
+                        type="button"
+                        class="close black"
+                        aria-label="Close"
+                        data-bs-dismiss="modal"
+                        id = "closeAddBookModal"
+                        >
+                        <span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="card px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="addBook(f.value)">
+                                <!-- <div  class="alert warnaAlert" style="width: 80%;">
+                                    Invalid Username or Password
+                                </div>
+                                <div class="alert warnaAlert" style="width: 80%;">
+                                Invalid Edit Config
+                            </div>
+                                <div class="alert warnaAlert" style="width: 80%;">
+                                    Data not filled
+                                </div> -->
+                                <!-- Email input -->
+                                    <label class="form-label pb-1" for="inputTitle">Book Title</label>
+                                    <input ngModel type="text" id="inputTitle" name="inputTitle" class="form-control" />
+                                    <br>
+                                <!-- Category input -->
+                                    <label class="form-label pb-1" for="inputCategory">Choose Config Service Changes to add:</label>
+                                    <div class="d-flex justify-content-end">
+                                        <select [(ngModel)]="addData" id="inputCategory" name="inputCategory" class="form-control" aria-placeholder="selected-path" >
+                                            <option *ngFor="let inside of category | keyvalue; let i=index" [ngValue]="inside.value">{{inside.value}}</option>
+                                        </select>
+                                    </div>
+                                <!-- Writer input -->
+                                    <label class="form-label pb-1" for="inputWriter">Writer Name</label>
+                                    <input ngModel type="text" id="inputWriter" name="inputWriter" class="form-control" />
+                                    <br>
+                                <!-- Password input -->
+                                    <label class="form-label pb-1" for="inputPicture">Picture (url)</label>
+                                    <input ngModel type="text" id="inputPicture" name="inputPicture" class="form-control"/>
+                                    <br>
+                                <!-- Commit message input-->
+                                    <label class="form-label pb-1" for="inputDescription">Config File Content:</label>
+                                    <textarea ngModel id="inputDescription" name="inputDescription"  rows="4" class="form-control"></textarea>
+                                    <br>
+                                <!-- Submit button -->
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                        Close
+                                    </button>&nbsp;&nbsp;&nbsp;
+                                    <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Edit</button>
+                                    <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-app-loading *ngIf="isLoading"></app-app-loading>

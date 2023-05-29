@@ -1,0 +1,24 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap");
+
+@import '~ngx-toastr/toastr';
+body.light-theme{
+	background-color: #f5f9fa;
+	--main-color-text:black;
+	--title-color-text:#005CAA;
+	--secondary-color-text:white;
+	--main-color:#005CAA;
+	--secondary-background-color:#ffffff;
+	--main-background-color:#f5f9fa;
+	--scroll-box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+	--scroll-wheel-color:#005CAA;
+	--toast-success-backcolor:#fafafa;
+	--navbar-hover-color:rgba(0,0,0,0.5);
+	--box-shadow-color:0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss'; */
