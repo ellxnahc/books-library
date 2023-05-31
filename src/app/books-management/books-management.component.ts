@@ -4,6 +4,8 @@ import { BooksManagementService } from '../service/books-management.service';
 import { Observable, Subscription, debounceTime, defer, distinctUntilChanged, filter, map, merge, of, share, startWith } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { CategoryManagementService } from '../service/category-management.service';
+import { BookCategory, CategoryData } from '../model/category.model';
 
 @Component({
   selector: 'app-books-management',
@@ -27,8 +29,9 @@ export class BooksManagementComponent implements OnInit{
 
   addData:string = "Choose Category"
   temp:any;
-
-  category:string[]=['Economy','Marketing','Novel','Computer'];
+  categoryData:CategoryData;
+  showCat: any;
+  // category:string[]=['Economy','Marketing','Novel','Computer'];
 
   $bookSubscriptionFetch : Subscription = Subscription.EMPTY;
 
@@ -39,6 +42,7 @@ export class BooksManagementComponent implements OnInit{
   $addNewSubscribe : Subscription = Subscription.EMPTY;
   constructor(
     private booksManagementService:BooksManagementService,
+    private categoryService: CategoryManagementService,
     private router:Router,
     private formBuilder: FormBuilder,
   ) {
@@ -73,6 +77,13 @@ export class BooksManagementComponent implements OnInit{
           }
         })
       })
+
+      this.categoryService.fetchCategory().
+      subscribe((data:CategoryData)=>{
+        this.categoryData = data;
+        this.showCat = this.categoryData.category;
+        console.log(this.showCat)
+      });
 
     }
 

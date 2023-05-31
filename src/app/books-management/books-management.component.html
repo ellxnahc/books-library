@@ -69,7 +69,7 @@
                                     <label class="form-label pb-1" for="inputCategory">Choose Config Service Changes to add:</label>
                                     <div class="d-flex justify-content-end">
                                         <select [(ngModel)]="addData" id="inputCategory" name="inputCategory" class="form-control" aria-placeholder="selected-path" >
-                                            <option *ngFor="let inside of category | keyvalue; let i=index" [ngValue]="inside.value">{{inside.value}}</option>
+                                            <option *ngFor="let item of showCat; index as i" [value]="item.id">{{item.categoryName}}</option>
                                         </select>
                                     </div>
                                 <!-- Writer input -->
