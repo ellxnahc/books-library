@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppLoadingComponent,
     BookDetailComponent,
     AuthComponent,
-    DashboardComponent
+    DashboardComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

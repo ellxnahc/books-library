@@ -1,0 +1,65 @@
+<div class="modal" class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <div class="form-group has-search ms-3 float-left my-auto">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input class ="form-control" type="text" value=""/>
+        </div>
+        <div>
+            <button type="button" class="btn hover-edit" data-bs-toggle="modal" data-bs-target="#addCatModal"><i class="fas fa-plus"></i>&nbsp; Add Category</button>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="!isLoading">
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let col of categoryData; index as i;">
+                <td>{{i+1}}</td>
+                <td>{{col.categoryName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="addCatModal" tabindex="-1" aria-labelledby="addCatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modalBackground">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCatModalLabel">Add Category</h5>
+                    <button
+                    type="button"
+                    class="close black"
+                    aria-label="Close"
+                    data-bs-dismiss="modal"
+                    id = "closeAddCatModal"
+                    >
+                    <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="card px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="addCategory(f.value)">
+                            <!-- Category input -->
+                                <label class="form-label pb-1" for="inputCategory">New Category:</label>
+                                <div class="d-flex justify-content-end">
+                                    <input ngModel type="text" id="inputCategory" name="inputCategory" class="form-control" />
+                                </div>
+                            <!-- Submit button -->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                    Close
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Add</button>
+                                <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-app-loading *ngIf="isLoading"></app-app-loading>

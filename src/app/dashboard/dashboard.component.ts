@@ -59,6 +59,7 @@ export class DashboardComponent implements OnInit {
       this.getBookData = data.books;
       this.isLoading = false;
       this.displayBook = data.books;
+      console.log(this.displayBook)
     });
 
     searchString$.subscribe(value=>{
@@ -69,6 +70,8 @@ export class DashboardComponent implements OnInit {
         }
       })
     })
+
+   
   }
 
   

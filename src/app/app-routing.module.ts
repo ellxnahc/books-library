@@ -5,6 +5,7 @@ import { BooksManagementComponent } from './books-management/books-management.co
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoryComponent } from './category/category.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,8 @@ const routes: Routes = [
     path: 'admin/books-management', component: BooksManagementComponent, children: []
   }, {
     path: 'admin/books-management/book-details/:id', component: BookDetailComponent
+  }, {
+    path: 'admin/category-management', component: CategoryComponent
   }
   // {
   //   path: 'register', component: RegisterComponent,
