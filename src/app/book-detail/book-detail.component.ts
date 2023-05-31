@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BookDisplayDetail } from '../model/book.model';
 import { Subscription } from 'rxjs';
 import { BooksManagementService } from '../service/books-management.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -23,9 +23,14 @@ export class BookDetailComponent {
 
   category:string[]=['Economy','Marketing','Novel','Computer'];
 
-  constructor(private booksManagementService:BooksManagementService , private route:ActivatedRoute, private authService:AuthService){}
+  constructor(
+    private router:Router,
+    private booksManagementService:BooksManagementService , 
+    private route:ActivatedRoute, 
+    private authService:AuthService){}
 
   ngOnInit(){
+    this.role = this.authService.userRole;
     this.isLoading = true;
     this.$paramSubs = this.route.params.subscribe((data)=>{
       this.booksId = data['id'];
@@ -45,6 +50,7 @@ export class BookDetailComponent {
         description:data.description,
         borowedStatus:data.borowedStatus
       };
+      console.log(this.bookDisplayDetail.borowedStatus);
     })
 
   }
@@ -59,18 +65,38 @@ export class BookDetailComponent {
       description: form.inputDescription,
       borowedStatus: false
     }
-    this.booksManagementService.editBook(this.bookDisplayDetail).subscribe(data=>{
+    this.booksManagementService.editBook(this.bookDisplayDetail, this.booksId).subscribe(data=>{
       this.isLoading = false;
       this.ngOnDestroy();
       const closeModal = document.getElementById('closeEditBookModal');
       closeModal?.click();
-      this.fetchData();
     });
 
   }
 
-  fetchData(){
 
+  borrowBook(){
+    this.isLoading = true;
+    this.bookDisplayDetail.borowedStatus=true;
+    this.booksManagementService.borrowBook(this.bookDisplayDetail, this.booksId).subscribe(data=>{
+      this.booksManagementService.addBorrowDetailBook(this.bookDisplayDetail,this.booksId).subscribe(data=>{
+
+        this.isLoading = false;
+        this.ngOnDestroy();
+        const closeModal = document.getElementById('closeBorrowBookModal');
+        closeModal?.click();
+      })
+    });
+  }
+
+  deleteBook(){
+    this.isLoading = true;
+    this.booksManagementService.deleteBook(this.booksId).subscribe(data=>{
+      this.isLoading = false;
+      const closeModal = document.getElementById('closeDeleteBookModal');
+      closeModal?.click();
+      this.router.navigate(['/admin/books-management']);
+    })
 
   }
 

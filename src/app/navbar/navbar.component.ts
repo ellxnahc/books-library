@@ -14,48 +14,50 @@ import { AlertComponent } from 'ngx-bootstrap/alert';
 export class NavbarComponent implements OnInit {
 
   isLogin: boolean = false;
-  isLoading:boolean =false;
+  isLoading: boolean = false;
   obj: any;
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  registered:boolean = true;
-  errorMsg:string = '';
+  registered: boolean = true;
+  errorMsg: string = '';
   alerts: any[] = [{
     type: 'danger',
     msg: '',
     timeout: 2000
   }];
 
-  isUser: boolean=false;
-  isAdmin:boolean=false;
-  isGuess:boolean=false;
-  ngOnInit(){
+  isUser: boolean = false;
+  isAdmin: boolean = false;
+  isGuess: boolean = false;
+  ngOnInit() {
     document.body.classList.toggle("light-theme");
   }
 
-  ngDoCheck(){
+  ngDoCheck() {
 
-    this.isUser=false;
-    this.isAdmin=false;
-    this.isGuess=false;
+    this.isUser = false;
+    this.isAdmin = false;
+    this.isGuess = false;
     // this.obj = JSON.parse(localStorage.getItem('isLogin')||'')
     // console.log(this.obj)
     this.obj = localStorage.getItem('userData');
     // console.log(JSON.parse(this.obj).email);
-    if(this.obj===null){
-      this.isGuess=true;
-      this.isLogin= false;
-    }else if(JSON.parse(this.obj).email==="knowryadmin@gmail.com" || JSON.parse(this.obj).email==="aewinj@gmail.com"){
-      this.isAdmin=true;
-      this.isLogin= true
-    }else{
-      this.isUser=true;
-      this.isLogin= true
+    if (this.obj === null) {
+      this.isGuess = true;
+      this.isLogin = false;
+    } else if (JSON.parse(this.obj).email === "knowryadmin@gmail.com" || JSON.parse(this.obj).email === "aewinj@gmail.com") {
+      this.isAdmin = true;
+      this.isLogin = true
+      this.authService.userRole = 1;
+    } else {
+      this.isUser = true;
+      this.isLogin = true
+      this.authService.userRole = 2;
     }
   }
 
-  logOut(){
+  logOut() {
     this.authService.logout();
-    this.isLogin= false;
+    this.isLogin = false;
   }
 }

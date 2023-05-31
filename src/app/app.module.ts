@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import {AlertModule} from 'ngx-bootstrap/alert';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -14,6 +14,7 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
+import { BookBorrowedListComponent } from './book-borrowed-list/book-borrowed-list.component';
 
 @NgModule({
   declarations: [
@@ -25,14 +26,15 @@ import { CategoryComponent } from './category/category.component';
     BookDetailComponent,
     AuthComponent,
     DashboardComponent,
-    CategoryComponent
+    CategoryComponent,
+    BookBorrowedListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,AlertModule.forRoot()
+    ReactiveFormsModule, AlertModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

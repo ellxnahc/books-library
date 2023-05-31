@@ -2,23 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { BookData, BookPostData } from '../model/book.model';
 import { BooksManagementService } from '../service/books-management.service';
 import { Observable, Subscription, debounceTime, defer, distinctUntilChanged, filter, map, merge, of, share, startWith } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { CategoryManagementService } from '../service/category-management.service';
 import { BookCategory, CategoryData } from '../model/category.model';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-books-management',
   templateUrl: './books-management.component.html',
   styleUrls: ['./books-management.component.css']
 })
-export class BooksManagementComponent implements OnInit{
+export class BooksManagementComponent implements OnInit {
 
-  isLoading:boolean = false;
-  public areMinimumCharactersTyped$: Observable<boolean>| undefined;
+  isLoading: boolean = false;
+  public areMinimumCharactersTyped$: Observable<boolean> | undefined;
 
   public searchControl!: FormControl;
-  book:BookPostData = {
+  book: BookPostData = {
     title: '',
     category: '',
     writer: '',
@@ -27,28 +28,30 @@ export class BooksManagementComponent implements OnInit{
     borowedStatus: false
   };
 
-  addData:string = "Choose Category"
-  temp:any;
-  categoryData:CategoryData;
+  addData: string = "Choose Category"
+  temp: any;
+  categoryData: CategoryData;
   showCat: any;
   // category:string[]=['Economy','Marketing','Novel','Computer'];
 
-  $bookSubscriptionFetch : Subscription = Subscription.EMPTY;
+  $bookSubscriptionFetch: Subscription = Subscription.EMPTY;
 
-  getBookData:BookData[]=[];
+  getBookData: BookData[] = [];
 
-  displayBook:BookData[] = [];
+  isAdmin: boolean = false;
+  displayBook: BookData[] = [];
 
-  $addNewSubscribe : Subscription = Subscription.EMPTY;
+  $addNewSubscribe: Subscription = Subscription.EMPTY;
   constructor(
-    private booksManagementService:BooksManagementService,
+    private booksManagementService: BooksManagementService,
     private categoryService: CategoryManagementService,
-    private router:Router,
+    private router: Router,
     private formBuilder: FormBuilder,
+    private authService: AuthService, private route: ActivatedRoute
   ) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.searchControl = this.formBuilder.control("");
 
     this.areMinimumCharactersTyped$ = this.searchControl.valueChanges.pipe(
@@ -60,41 +63,45 @@ export class BooksManagementComponent implements OnInit{
       defer(() => of(this.searchControl.value)),
       this.searchControl.valueChanges
     ).pipe(debounceTime(300), distinctUntilChanged());
-      this.isLoading = true;
+    this.isLoading = true;
 
-      this.$bookSubscriptionFetch = this.booksManagementService.fetchBook().
-      subscribe(data=>{
+    this.$bookSubscriptionFetch = this.booksManagementService.fetchBook().
+      subscribe(data => {
         this.getBookData = data.books;
         this.isLoading = false;
         this.displayBook = data.books;
       });
-
-      searchString$.subscribe(value=>{
-        this.displayBook=[];
-        this.temp = this.getBookData.filter(data=>{
-          if(data.title.toLowerCase().includes(value.toLowerCase())){
-            this.displayBook.push(data);
-          }
-        })
+    if (this.authService.userRole === 1) {
+      this.isAdmin = true;
+    } else {
+      this.isAdmin = false;
+    }
+    searchString$.subscribe(value => {
+      this.displayBook = [];
+      this.temp = this.getBookData.filter(data => {
+        if (data.title.toLowerCase().includes(value.toLowerCase())) {
+          this.displayBook.push(data);
+        }
       })
+    })
 
-      this.categoryService.fetchCategory().
-      subscribe((data:CategoryData)=>{
+    this.categoryService.fetchCategory().
+      subscribe((data: CategoryData) => {
         this.categoryData = data;
         this.showCat = this.categoryData.category;
         console.log(this.showCat)
       });
 
-    }
-
-
-  openDetail(id:string){
-    this.router.navigate(['/admin/books-management/book-details',id]);
   }
 
-  ngOnDestroy(){}
 
-  addBook(form:any){
+  openDetail(id: string) {
+    this.router.navigate(['/admin/books-management/book-details', id]);
+  }
+
+  ngOnDestroy() { }
+
+  addBook(form: any) {
     this.isLoading = true;
     this.book = {
       title: form.inputTitle,
@@ -104,18 +111,22 @@ export class BooksManagementComponent implements OnInit{
       description: form.inputDescription,
       borowedStatus: false
     }
-    this.booksManagementService.addNewBook(this.book).subscribe(data=>{
+    this.booksManagementService.addNewBook(this.book).subscribe(data => {
       this.isLoading = false;
       this.ngOnDestroy();
+      this.fetchData();
       const closeModal = document.getElementById('closeAddBookModal');
       closeModal?.click();
-      this.fetchData();
     });
 
   }
 
-  fetchData(){
-
-
+  fetchData() {
+    this.$bookSubscriptionFetch = this.booksManagementService.fetchBook().
+      subscribe(data => {
+        this.getBookData = data.books;
+        this.isLoading = false;
+        this.displayBook = data.books;
+      });
   }
 }

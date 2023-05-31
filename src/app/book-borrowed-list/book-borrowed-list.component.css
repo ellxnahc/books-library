@@ -1,0 +1,18 @@
+.card-text{
+    height: 7.5rem;
+}
+
+.card-img-left{
+    padding: 0 !important;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.card{
+    color: var(--main-color-text);
+    background-color: var(--secondary-background-color);
+    border: none;
+}
+
+.borrow-card{
+    box-shadow: var(--box-shadow-color);
+  }

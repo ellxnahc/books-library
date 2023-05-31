@@ -1,0 +1,78 @@
+<div class="container" *ngIf="!isLoading">
+    <div class="justify-content-center mt-5" *ngIf="isBorrowing">
+        <div *ngFor="let book of borrowedBook;let i = index" class="col-auto">
+            <div *ngIf="i%4===3" class="w-100">
+            </div>
+            <div class="pt-2 container">
+                <div class="shadow-risen borrow-card card rounded container" style="width:auto;">
+                    <div class="row">
+                        <img src="{{book.picture}}" style=" object-fit: contain;" class="card-img-left col-4"
+                            style="height:12rem; width: auto;" alt="..." />
+                        <div class="card-body col-8">
+                            <div class="card-text">
+                                <h5 class="card-title title">{{book.title}}</h5>
+                                <p>{{book.category }} </p>
+                                <p>Borrower Email : {{book.email }} </p>
+                            </div>
+                            <div class="d-flex">
+                                <button class="ms-auto btn btn-primary" (click)="returnData(i)" id="openReturn"
+                                    data-bs-toggle="modal" data-bs-target="#returnBookModal">Return</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <div class="justify-content-center mt-5" *ngIf="!isBorrowing">
+        <div class="pt-2 container">
+            <div class="shadow-risen borrow-card card rounded container" style="width:auto;">
+                <div class="row">
+                    <div class="card-body col-8">
+                        <div class="card-text">
+                            <h5 class="card-title title">None</h5>
+                            <p class="card-text" *ngIf="!isAdmin">Belum ada buku yang anda pinjam</p>
+                            <p class="card-text" *ngIf="isAdmin">Buku yang dipinjam telah dikembalikan semua</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="returnBookModal" tabindex="-1" aria-labelledby="returnBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modalBackground">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="returnBookModalLabel">Return Book</h5>
+                    <button type="button" class="close black" aria-label="Close" data-bs-dismiss="modal"
+                        id="closeReturnBookModal">
+                        <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="card card-modal px-2 pt-1 pb-3 d-flex" #f="ngForm"
+                        (ngSubmit)="returnBorrowed(bookReturnData)">
+                        <p>Are you sure you want to return books with this detail?</p>
+                        Book title: {{bookReturnData.title}}
+                        <br>
+                        Book Category: {{bookReturnData.category}}
+                        <br>
+                        Book Writer: {{bookReturnData.writer}}
+                        <br>
+                        <!-- Submit button -->
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary mt-2 me-2" data-bs-dismiss="modal">
+                                Close
+                            </button>&nbsp;&nbsp;&nbsp;
+                            <button type="submit" *ngIf="!isLoading" class="btn btn-primary mt-2 ms-2">Return</button>
+                            <button type="button" *ngIf="isLoading"
+                                class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,9 +7,14 @@
     height: 23rem;
 }
 
-/* .card{
-    width: 80rem!important;
-} */
+.card{
+    width: 80rem;
+}
+
+.card-modal{
+    width: auto;
+    border: none;
+}
 
 
 .btn-primary{
@@ -34,3 +39,51 @@
 	color: var(--secondary-main-color);
     width: 110px;
 }
+
+.btn-delete{
+    background-color:lightgray;
+	color: var(--main-color);
+    width: 160px !important;
+}
+
+
+.form-control{
+    border-radius: 0;
+    color: var(--main-color-text)!important;
+    background-color: var(--secondary-background-color)!important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: var(--main-color);
+    box-shadow: none;
+  }
+  
+  .form-control:focus{
+    color: var(--main-color-text)!important;
+    background-color: var(--secondary-background-color)!important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+  
+  .form-control .ng-touched .ng-dirty .ng-valid{
+    color: var(--main-color-text)!important;
+    background-color: var(--secondary-background-color)!important;
+    border: none;
+    box-shadow: none;
+  }
+  
+  textarea.form-control {
+    color:var(--main-color-text)!important;
+    background: var(--secondary-background-color);
+    background-color: var(--secondary-background-color)!important;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: var(--main-color);
+    box-shadow: none;
+}
+::-webkit-resizer {
+    background: var(--main-color);
+  }

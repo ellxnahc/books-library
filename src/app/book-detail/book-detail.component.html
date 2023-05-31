@@ -18,8 +18,10 @@
                                     </div>
                                 <div class="d-flex">
                                     <button class="ms-auto btn btn-primary" data-bs-toggle="modal" data-bs-target="#signInModal" *ngIf="role===3">Borrow</button>
-                                    <button class="ms-auto btn btn-primary" *ngIf="role===2">Borrow</button>
-                                    <button class="ms-auto btn btn-secondary" *ngIf="role===1">Delete</button>
+                                    <button class="ms-auto btn btn-primary" *ngIf="role===2 && !bookDisplayDetail.borowedStatus" data-bs-toggle="modal"  data-bs-target="#borrowBookModal">Borrow</button>
+                                    <button class="ms-auto btn btn-primary" *ngIf="role===2 && bookDisplayDetail.borowedStatus" [disabled]="bookDisplayDetail.borowedStatus">Borrowed</button>
+                                    <button class="ms-auto btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteBookModal" *ngIf="role===1 && !bookDisplayDetail.borowedStatus">Delete</button>
+                                    <button class="ms-auto btn btn-delete" data-bs-toggle="modal" data-bs-target="#deleteBookModal" [disabled]="bookDisplayDetail.borowedStatus" *ngIf="role===1 && bookDisplayDetail.borowedStatus">Delete (Borrowed)</button>
                                     <button class="ms-3 btn btn-primary" *ngIf="role===1" data-bs-toggle="modal" data-bs-target="#editBookModal">Edit</button>
                                 </div>
                             </div>
@@ -47,7 +49,7 @@
                     <span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form class="card px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="editBook(f.value)">
+                    <form class="card card-modal px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="editBook(f.value)">
                             <!-- Book Title -->
                                 <label class="form-label pb-1" for="inputTitle">Book Title</label>
                                 <input [(ngModel)]="bookDisplayDetail.title" type="text" id="inputTitle" name="inputTitle" class="form-control" />
@@ -76,7 +78,7 @@
                                 <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
                                     Close
                                 </button>&nbsp;&nbsp;&nbsp;
-                                <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Edit</button>
+                                <button type="submit" *ngIf="!isLoading" class="btn btn-primary mt-2 ms-2">Edit</button>
                                 <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
                             </div>
                     </form>
@@ -85,4 +87,85 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="borrowBookModal" tabindex="-1" aria-labelledby="borrowBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modalBackground">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="borrowBookModalLabel">Borrow Book</h5>
+                    <button
+                    type="button"
+                    class="close black"
+                    aria-label="Close"
+                    data-bs-dismiss="modal"
+                    id = "closeBorrowBookModal"
+                    >
+                    <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="card card-modal px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="borrowBook()">
+                            <p>Are you sure you want to borrow books with this detail?</p>
+                            Book title: {{bookDisplayDetail.title}}
+                            <br>
+                            Book Category: {{bookDisplayDetail.category}}
+                            <br>
+                            Book Writer: {{bookDisplayDetail.writer}}
+                            <br>
+                            <!-- Submit button -->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                    Close
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" *ngIf="!isLoading" class="btn btn-primary mt-2 ms-2">Borrow</button>
+                                <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="deleteBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modalBackground">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteBookModalLabel">Delete Book</h5>
+                    <button
+                    type="button"
+                    class="close black"
+                    aria-label="Close"
+                    data-bs-dismiss="modal"
+                    id = "closeDeleteBookModal"
+                    >
+                    <span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="card card-modal px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="deleteBook()">
+                            <p>Are you sure you want to borrow books with this detail?</p>
+                            Book title: {{bookDisplayDetail.title}}
+                            <br>
+                            Book Category: {{bookDisplayDetail.category}}
+                            <br>
+                            Book Writer: {{bookDisplayDetail.writer}}
+                            <br>
+                            <!-- Submit button -->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                    Close
+                                </button>&nbsp;&nbsp;&nbsp;
+                                <button type="submit" *ngIf="!isLoading" class="btn btn-primary mt-2 ms-2">Delete</button>
+                                <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <app-app-loading *ngIf="isLoading"></app-app-loading>
