@@ -1,0 +1,77 @@
+<div  *ngIf="!isLoading">
+  <div class="alerts">
+    <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+  </div>
+
+  <div class="container" *ngIf="!isLoading">
+      <div class="d-flex justify-content-center">
+          <div>
+              <div class="pt-2 mt-5">
+                  <div class="modal-dialog" style="min-width: 498px;">
+                      <div class="modal-content">
+                          <div class="modalBackground">
+                              <div class="modal-header">
+                                  <h5 class="modal-title mb-3" id="editCatModalLabel">Edit Category</h5>
+                              </div>
+                              <div class="modal-body">
+                                  <form class="card px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="editCategory(f.value)">
+                                          <!-- ID disabled -->
+                                              <label class="form-label pb-1" for="inputCategory">ID:</label>
+                                              <div class="d-flex justify-content-end">
+                                                  <input [(ngModel)]="categoryData.id" type="text" id="categoryID" name="categoryID" class="form-control" disabled/>
+                                              </div>
+                                          <!-- Category input -->
+                                              <label class="form-label pb-1" for="inputCategory">Category:</label>
+                                              <div class="d-flex justify-content-end">
+                                                  <input [(ngModel)]="categoryData.categoryName" type="text" id="inputCategory" name="inputCategory" class="form-control" />
+                                              </div>
+                                          <!-- Submit button -->
+                                          <div class="d-flex justify-content-end">
+                                            <button type="submit" *ngIf="!isLoading" class="btn btn-secondary mt-2 ms-2" data-bs-toggle="modal" data-bs-target="#deleteCatModal">Delete</button>
+                                            <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Edit</button>
+                                            <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                                          </div>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="modal fade" id="deleteCatModal" tabindex="-1" aria-labelledby="deleteCatModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modalBackground">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="deleteCatModalLabel">Delete Category</h5>
+                  <button
+                  type="button"
+                  class="close black"
+                  aria-label="Close"
+                  data-bs-dismiss="modal"
+                  id = "closeDeleteCatModal"
+                  >
+                  <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                  <form class="card card-modal px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="deleteCategory()">
+                          <p>Are you sure you want to delete {{categoryData.categoryName}} from category list?</p>
+
+                          <!-- Submit button -->
+                          <div class="d-flex justify-content-end">
+                              <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                  Close
+                              </button>&nbsp;&nbsp;&nbsp;
+                              <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Delete</button>
+                              <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                          </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<app-app-loading *ngIf="isLoading"></app-app-loading>

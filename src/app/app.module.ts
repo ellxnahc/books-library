@@ -15,6 +15,7 @@ import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { BookBorrowedListComponent } from './book-borrowed-list/book-borrowed-list.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BookBorrowedListComponent } from './book-borrowed-list/book-borrowed-li
     AuthComponent,
     DashboardComponent,
     CategoryComponent,
-    BookBorrowedListComponent
+    BookBorrowedListComponent,
+    CategoryDetailComponent
   ],
   imports: [
     BrowserModule,

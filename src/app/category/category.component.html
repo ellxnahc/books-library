@@ -1,3 +1,6 @@
+<div class="alerts">
+  <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+</div>
 <div class="modal" class="container mt-4">
     <div class="d-flex justify-content-between">
         <div class="form-group has-search ms-3 float-left my-auto">
@@ -16,12 +19,17 @@
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Category</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let col of categoryData; index as i;">
                 <td>{{i+1}}</td>
                 <td>{{col.categoryName}}</td>
+                <td>
+                  <button type="button" class="edit-btn" (click)="redirectToDetailCat(col.id)"><i
+                  class="fas fa-pencil"></i></button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -62,4 +70,6 @@
         </div>
     </div>
 </div>
+
+
 <app-app-loading *ngIf="isLoading"></app-app-loading>

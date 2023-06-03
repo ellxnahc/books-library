@@ -7,6 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { BookBorrowedListComponent } from './book-borrowed-list/book-borrowed-list.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,9 @@ const routes: Routes = [
     path: 'admin/books-management/book-details/:id', component: BookDetailComponent
   }, {
     path: 'admin/category-management', component: CategoryComponent
+  },
+   {
+    path: 'admin/category-management/category-detail/:id', component: CategoryDetailComponent
   },
   {
     path: 'user/books', component: BooksManagementComponent,

@@ -15,7 +15,7 @@ export class CategoryComponent implements OnInit{
   public areMinimumCharactersTyped$: Observable<boolean>| undefined;
   public searchControl!: FormControl;
   categoryData: BookCategory[];
-
+  alertMsg:string= '';
   cat:Category = {
     categoryName: '',
   };
@@ -45,7 +45,8 @@ export class CategoryComponent implements OnInit{
     }
     this.catManagementService.addNewCategory(this.cat).subscribe(data=>{
       this.isLoading = false;
-      window.location.reload();
+      this.alertMsg = 'Data has been added'
+      setTimeout(()=>{window.location.reload()}, 4000);
       this.router.navigate(['./admin/category-management'])
       this.ngOnDestroy();
       const closeModal = document.getElementById('closeAddCatModal');
@@ -54,5 +55,11 @@ export class CategoryComponent implements OnInit{
     });
 
   }
+
+  redirectToDetailCat(id:string){
+    this.router.navigate(['admin/category-management/category-detail', id])
+  }
+
+
 
 }
