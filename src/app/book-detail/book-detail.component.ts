@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { BooksManagementService } from '../service/books-management.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { CategoryData } from '../model/category.model';
+import { CategoryManagementService } from '../service/category-management.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -21,13 +23,17 @@ export class BookDetailComponent {
 
   role:number=3;
 
-  category:string[]=['Economy','Marketing','Novel','Computer'];
+  categoryData: CategoryData;
+  showCat: any;
+  selectedCategory: any;
+  // category:string[]=['Economy','Marketing','Novel','Computer'];
 
   alertMsg:string = '';
 
   constructor(
     private router:Router,
     private booksManagementService:BooksManagementService ,
+    private categoryService: CategoryManagementService,
     private route:ActivatedRoute,
     private authService:AuthService){}
 
@@ -39,6 +45,8 @@ export class BookDetailComponent {
       this.fetchDetailData();
     });
     this.role=this.authService.userRole;
+
+
   }
 
   fetchDetailData(){
@@ -55,9 +63,16 @@ export class BookDetailComponent {
       console.log(this.bookDisplayDetail.borowedStatus);
     })
 
+    this.categoryService.fetchCategory().
+      subscribe((data: CategoryData) => {
+        this.categoryData = data;
+        this.showCat = this.categoryData.category;
+        console.log(this.showCat)
+    });
   }
 
   editBook(form:any){
+    console.log(form);
     this.isLoading = true;
     this.bookDisplayDetail = {
       title: form.inputTitle,
@@ -68,6 +83,7 @@ export class BookDetailComponent {
       borowedStatus: false
     }
     this.booksManagementService.editBook(this.bookDisplayDetail, this.booksId).subscribe(data=>{
+      this.alertMsg= 'Data has been saved'
       this.isLoading = false;
       this.ngOnDestroy();
       const closeModal = document.getElementById('closeEditBookModal');

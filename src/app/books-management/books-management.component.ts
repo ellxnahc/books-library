@@ -41,6 +41,8 @@ export class BooksManagementComponent implements OnInit {
   isAdmin: boolean = false;
   displayBook: BookData[] = [];
 
+  alertMsg: string = ''
+
   $addNewSubscribe: Subscription = Subscription.EMPTY;
   constructor(
     private booksManagementService: BooksManagementService,
@@ -112,6 +114,7 @@ export class BooksManagementComponent implements OnInit {
       borowedStatus: false
     }
     this.booksManagementService.addNewBook(this.book).subscribe(data => {
+      this.alertMsg='Data has been added'
       this.isLoading = false;
       this.ngOnDestroy();
       this.fetchData();

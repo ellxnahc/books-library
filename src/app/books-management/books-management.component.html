@@ -1,3 +1,6 @@
+<div class="alerts">
+  <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+</div>
 <div class="modal" class="container mt-4">
     <div class="d-flex justify-content-between">
         <div class="form-group has-search ms-3 float-left my-auto">
@@ -68,7 +71,7 @@
                         <div class="d-flex justify-content-end">
                             <select [(ngModel)]="addData" id="inputCategory" name="inputCategory" class="form-control"
                                 aria-placeholder="selected-path">
-                                <option *ngFor="let item of showCat; index as i" [value]="item.id">{{item.categoryName}}
+                                <option *ngFor="let item of showCat; index as i" [value]="item.categoryName">{{item.categoryName}}
                                 </option>
                             </select>
                         </div>

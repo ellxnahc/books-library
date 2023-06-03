@@ -60,10 +60,10 @@
                                 <input [(ngModel)]="bookDisplayDetail.title" type="text" id="inputTitle" name="inputTitle" class="form-control" />
                                 <br>
                             <!-- Category input -->
-                                <label class="form-label pb-1" for="inputCategory">Choose Config Service Changes to add:</label>
+                                <label class="form-label pb-1" for="inputCategory">Category</label>
                                 <div class="d-flex justify-content-end">
                                     <select [(ngModel)]="bookDisplayDetail.category" id="inputCategory" name="inputCategory" class="form-control" aria-placeholder="selected-path" >
-                                        <option *ngFor="let inside of category | keyvalue; let i=index" [ngValue]="inside.value">{{inside.value}}</option>
+                                        <option *ngFor="let inside of showCat; index as i" [value]="inside.categoryName">{{inside.categoryName}}</option>
                                     </select>
                                 </div>
                             <!-- Writer input -->
