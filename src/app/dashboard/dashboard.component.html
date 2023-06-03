@@ -5,7 +5,7 @@
             <span class="fa fa-search form-control-feedback"></span>
             <input class ="form-control" type="text" value="" [formControl]="searchControl"/>
         </div>
-    </div> 
+    </div>
 </div>
 <div class="container mt-3" *ngIf="!isLoading">
     <div class="row  d-flex justify-content-start">
@@ -13,7 +13,7 @@
             <div>
                 <div class="pt-2">
                     <div class="shadow-risen card book-card rounded" style="width: 14rem;">
-                        
+
                         <div class="col align-center h-50">
                             <img src="{{book.picture}}" style="height: 14rem; object-fit: contain;"
                                 class="card-img-top align-center" alt="...">
@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <div class="card-text">
                                 <h5 class="card-title title">{{book.title}}</h5>
-                                <p class="card-text">{{book.writer}} </p>
+                                <p class="card-text">{{book.category}} </p>
                             </div>
                             <div class="d-flex">
                                 <button class="btn btn-primary col" (click)="openDetail(book.id)">Details</button>

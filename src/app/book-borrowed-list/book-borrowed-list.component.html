@@ -1,3 +1,6 @@
+<div class="alerts">
+  <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+</div>
 <div class="container" *ngIf="!isLoading">
     <div class="justify-content-center mt-5" *ngIf="isBorrowing">
         <div *ngFor="let book of borrowedBook;let i = index" class="col-auto">

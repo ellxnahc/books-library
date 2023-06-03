@@ -23,10 +23,12 @@ export class BookDetailComponent {
 
   category:string[]=['Economy','Marketing','Novel','Computer'];
 
+  alertMsg:string = '';
+
   constructor(
     private router:Router,
-    private booksManagementService:BooksManagementService , 
-    private route:ActivatedRoute, 
+    private booksManagementService:BooksManagementService ,
+    private route:ActivatedRoute,
     private authService:AuthService){}
 
   ngOnInit(){
@@ -80,7 +82,7 @@ export class BookDetailComponent {
     this.bookDisplayDetail.borowedStatus=true;
     this.booksManagementService.borrowBook(this.bookDisplayDetail, this.booksId).subscribe(data=>{
       this.booksManagementService.addBorrowDetailBook(this.bookDisplayDetail,this.booksId).subscribe(data=>{
-
+        this.alertMsg = 'Successful! See your borrowed list'
         this.isLoading = false;
         this.ngOnDestroy();
         const closeModal = document.getElementById('closeBorrowBookModal');

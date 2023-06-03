@@ -1,4 +1,4 @@
-<div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+ <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modalBackground">
@@ -32,8 +32,8 @@
                   <button type="submit" class="btn btn-primary" [disabled]="!authForm.valid" (click)="onSubmit(authForm)" *ngIf="!registered  && !isLoading">Signup</button>
                   <button type="submit" class="btn btn-primary" [disabled]="true" (click)="onSubmit(authForm)" *ngIf="isLoading">Loading...</button>
                   <br><br>
-                  <span style="font-size: small;" *ngIf="registered">Doesn't have an account? <a style="color: blue; text-decoration: underline;" (click)="registered=false">Sign Up</a></span>
-                  <span style="font-size: small;" *ngIf="!registered">Already have an account? <a style="color: blue; text-decoration: underline;" (click)="registered=true">Login</a></span>
+                  <span style="font-size: small;" *ngIf="registered">Doesn't have an account? <a style="color: blue; text-decoration: underline;cursor: pointer;" (click)="registered=false">Sign Up</a></span>
+                  <span style="font-size: small;" *ngIf="!registered">Already have an account? <a style="color: blue; text-decoration: underline;cursor: pointer;" (click)="registered=true">Login</a></span>
               </form>
         </div>
         </div>

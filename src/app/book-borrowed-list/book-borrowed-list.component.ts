@@ -14,6 +14,7 @@ export class BookBorrowedListComponent {
   isLoading: boolean = false;
   isBorrowing: boolean = false;
   isAdmin: boolean = false;
+  alertMsg:string = '';
   constructor(
     private authService: AuthService,
     private booksBorrowingManagement: BooksBorrowingManagementService,
@@ -83,6 +84,7 @@ export class BookBorrowedListComponent {
     this.bookManagementService.returnBook(bookBorrowedData).subscribe(data => {
       this.booksBorrowingManagement.returnBookBorrowing(bookBorrowedData).subscribe(data => {
         this.booksBorrowingManagement.borrowingList(this.authService.userRole).subscribe(data => {
+          this.alertMsg = 'The book has been returned successfully'
           console.log(data.borrowedBook);
           this.borrowedBook = data.borrowedBook;
           this.isLoading = false;

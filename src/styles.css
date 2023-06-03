@@ -22,3 +22,8 @@ body.light-theme{
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/regular.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss'; */
+
+.alerts{
+  margin-left: 30px;
+  margin-right: 30px;
+}
