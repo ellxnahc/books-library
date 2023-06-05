@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, subscribeOn } from 'rxjs';
 import { AlertComponent } from 'ngx-bootstrap/alert';
 
-import { AuthRequestData, AuthResponseData } from '../interface/auth';
+import { AuthRequestData, AuthResponseData, UserData } from '../model/auth';
 import { AuthService } from '../service/auth.service';
 
 enum UserRole{
@@ -31,6 +31,7 @@ export class AuthComponent {
       timeout: 2000
     }];
     user:any;
+    postUserData: UserData;
 
     constructor(private authService: AuthService, private router: Router){}
 
@@ -86,6 +87,14 @@ export class AuthComponent {
           next : (data:any)=>{
             this.isLoading=false;
             console.log(data);
+            let obj = {
+              id : data.localId,
+              email: data.email,
+              password: password,
+              role: 2
+            }
+            this.postUserData = obj;
+            this.authService.addToDB(this.postUserData).subscribe((dt:any)=>{this.errorMsg=''})
             this.errorMsg='';
             this.onSwitchMode();
           },

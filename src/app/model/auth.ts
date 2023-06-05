@@ -40,3 +40,22 @@ export class AuthResponseData{
 
   }
 }
+
+export class UserData{
+  id: string;
+  email: string;
+  password: string;
+  role: number
+
+  constructor(object?: any){
+    if (object) {
+      if(object.id) this.id = object.id;
+      if(object.email) this.email = object.email;
+      if(object.password) this.password = object.password;
+      if(object.role) this.role = object.role;
+      for (var prop in object) {
+        prop = object[prop];
+      }
+    }
+  }
+}

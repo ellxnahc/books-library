@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
-import { AuthRequestData, AuthResponseData } from "../interface/auth";
-import { User } from '../interface/user.model';
+import { AuthRequestData, AuthResponseData, UserData } from "../model/auth";
+import { User } from '../model/user.model';
 
 enum UserRole{
         Admin = 1,
@@ -19,12 +19,15 @@ export class AuthService {
 
   userData:any;
   userRole:UserRole;
+  endPointURL: string = 'https://library-management-9c253-default-rtdb.asia-southeast1.firebasedatabase.app/';
+  userUrl: string = this.endPointURL + 'user.json';
+  postUserData: UserData;
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) { }
 
     signup(authRequestData: AuthRequestData){
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAXvJ2n9WpHRiUGoHV9mR-XndXnv3EgMxU',
+        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDGkxMOJ19OJ25UeDxAFHn0kU-c3LTk8a4',
         {
             email:authRequestData.email,
             password: authRequestData.password,
@@ -35,13 +38,17 @@ export class AuthService {
             catchError(this.handleError),
             tap( resData => {
                 this.handleAuthentication(resData.email, resData.localId
-                    , resData.idToken, +resData.expiresIn)
+                    , resData.idToken, +resData.expiresIn, 'signup')
             })
-        );
+            );
+    }
+
+    addToDB(data: UserData){
+        return this.http.post(this.userUrl, data);
     }
 
     login(authRequestData: AuthRequestData){
-        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAXvJ2n9WpHRiUGoHV9mR-XndXnv3EgMxU',
+        return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDGkxMOJ19OJ25UeDxAFHn0kU-c3LTk8a4',
             {
                 email:authRequestData.email,
                 password: authRequestData.password,
@@ -51,7 +58,7 @@ export class AuthService {
             catchError(this.handleError),
             tap( resData => {
                 this.handleAuthentication(resData.email, resData.localId
-                    , resData.idToken, +resData.expiresIn)
+                    , resData.idToken, +resData.expiresIn, 'signin')
             })
         );
     }
@@ -86,13 +93,12 @@ export class AuthService {
       return throwError(errorMsg);
   }
 
-  private handleAuthentication(email: string, localId: string, token: string, expiresIn: number){
+  private handleAuthentication(email: string, localId: string, token: string, expiresIn: number, action:string){
       const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
       const user:any = new User(email, localId, token, expirationDate);
       this.userData = user;
       this.autoLogout(expiresIn * 1000);
-      localStorage.setItem('userData', JSON.stringify(user));
-      localStorage.setItem('isLogin', '1');
+      if(action==='signin') localStorage.setItem('userData', JSON.stringify(user));
   }
 
   autoLogout(expirationDuration: number){
