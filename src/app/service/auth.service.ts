@@ -125,10 +125,22 @@ export class AuthService {
         let postArray: UserDataArray = { user: [] };
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
-            postArray.user.push({ ...responseData[key], id: key })
+            postArray.user.push({ ...responseData[key], uid: key })
           }
         }
         return postArray;
       }))
+  }
+
+  deleteUser(id:string){
+    const data = {
+      [id] :{
+        email: null,
+        id: null,
+        password:null,
+        role: null
+      }
+    }
+    return this.http.patch(this.userUrl, data);
   }
 }

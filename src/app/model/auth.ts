@@ -1,9 +1,9 @@
 export class AuthRequestData{
     email: string;
     password: string;
-    secureToken: boolean; 
-  
-  
+    secureToken: boolean;
+
+
     constructor(object?: any) {
       if (object) {
         if(object.email) this.email = object.email;
@@ -13,13 +13,13 @@ export class AuthRequestData{
           prop = object[prop];
         }
       }
-  
+
     }
 }
 
 export class AuthResponseData{
   idToken: string;
-  email: string; 
+  email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
@@ -43,6 +43,7 @@ export class AuthResponseData{
 
 export class UserData{
   id: string;
+  uid?:string;
   email: string;
   password: string;
   role: number
@@ -51,6 +52,7 @@ export class UserData{
     if (object) {
       if(object.id) this.id = object.id;
       if(object.email) this.email = object.email;
+      if(object.uid) this.uid = object.uid;
       if(object.password) this.password = object.password;
       if(object.role) this.role = object.role;
       for (var prop in object) {

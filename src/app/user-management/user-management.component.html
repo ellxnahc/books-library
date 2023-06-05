@@ -1,5 +1,5 @@
 <div class="alerts">
-    <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+    <alert *ngIf="alertMsgDel!=''"  type="success" dismissOnTimeout="3000" >{{alertMsgDel}}</alert>
 </div>
 <div class="modal" class="container mt-4">
     <div class="d-flex justify-content-between">
@@ -22,7 +22,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Password</th>
                 <th scope="col">Role</th>
-                <!-- <th scope="col">Action</th> -->
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -33,11 +33,45 @@
                 <td>{{col.email}}</td>
                 <td>{{col.password}}</td>
                 <td>{{col.roleStatus}}</td>
-                <!-- <td>
-                  <button type="button" class="edit-btn"><i
-                  class="fas fa-pencil"></i></button>
-                </td> -->
+                <td>
+                  <button type="button" class="edit-btn" (click)="delUser(col)"><i
+                  class="fas fa-trash" data-bs-toggle="modal" data-bs-target="#deleteUserModal" ></i></button>
+                </td>
+                <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modalBackground">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="deleteUserModalLabel">Delete Category</h5>
+                                  <button
+                                  type="button"
+                                  class="close black"
+                                  aria-label="Close"
+                                  data-bs-dismiss="modal"
+                                  id = "closeDeleteUserModal"
+                                  >
+                                  <span aria-hidden="true">&times;</span></button>
+                              </div>
+                              <div class="modal-body">
+                                  <form class="card card-modal px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="deleteUser(dataToBeDeleted.uid)">
+                                          <p>Are you sure you want to delete {{dataToBeDeleted.email}} from user list?</p>
+
+                                          <!-- Submit button -->
+                                          <div class="d-flex justify-content-end">
+                                              <button type="button" class="btn btn-secondary mt-2 me-2"  data-bs-dismiss="modal">
+                                                  Close
+                                              </button>&nbsp;&nbsp;&nbsp;
+                                              <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Delete</button>
+                                              <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
+                                          </div>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
             </tr>
         </tbody>
     </table>
 </div>
+<app-app-loading *ngIf="isLoading"></app-app-loading>

@@ -15,7 +15,8 @@ export class CategoryDetailComponent implements OnInit{
   isLoading:boolean = false;
   $paramSubs:Subscription = Subscription.EMPTY;
   categoryId:string;
-  alertMsg:string = ''
+  alertMsg:string = '';
+  alertMsgDel:string = '';
   // categoryData: any={
   //   id: '',
   //   categoryName:''
@@ -30,6 +31,8 @@ export class CategoryDetailComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.alertMsg='';
+    this.alertMsgDel = '';
     this.isLoading = true;
     this.categoryData =
       {id: '', categoryName: ''}
@@ -50,6 +53,7 @@ export class CategoryDetailComponent implements OnInit{
   }
 
   editCategory(form:any){
+    this.alertMsgDel = '';
     this.isLoading= true;
     this.categoryData ={
       id: this.categoryId,
@@ -58,11 +62,12 @@ export class CategoryDetailComponent implements OnInit{
 
     this.categoryService.editCategory(this.categoryData).subscribe(data=>{
       this.alertMsg = 'Data has been saved';
+      setTimeout(()=>{this.router.navigate(['/admin/category-management']);}, 3000)
       this.isLoading = false;
       this.ngOnDestroy();
     })
 
-    this.alertMsg = '';
+
   }
 
   ngOnDestroy(){
@@ -70,12 +75,16 @@ export class CategoryDetailComponent implements OnInit{
 
   }
 
-  deleteCategory(){
+  deleteBuffer(){
     this.alertMsg = '';
+    console.log(this.alertMsg)
+  }
+
+  deleteCategory(){
     this.isLoading = true;
     this.categoryService.deleteCategory(this.categoryId).subscribe(data=>{
-      this.alertMsg = 'Data has been deleted'
-      setTimeout(()=>{this.router.navigate(['/admin/books-management']);}, 3000)
+      this.alertMsgDel = 'Data has been deleted'
+      setTimeout(()=>{this.router.navigate(['/admin/category-management']);}, 2000)
       this.isLoading = false;
       const closeModal = document.getElementById('closeDeleteCatModal');
       closeModal?.click();

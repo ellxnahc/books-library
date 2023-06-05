@@ -1,6 +1,7 @@
 <div  *ngIf="!isLoading">
   <div class="alerts">
-    <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+    <alert *ngIf="(alertMsg!=''&& alertMsgDel==='')"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+    <alert *ngIf="(alertMsg===''&& alertMsgDel!='')"  type="success" dismissOnTimeout="3000" >{{alertMsgDel}}</alert>
   </div>
 
   <div class="container" *ngIf="!isLoading">
@@ -27,7 +28,7 @@
                                               </div>
                                           <!-- Submit button -->
                                           <div class="d-flex justify-content-end">
-                                            <button type="submit" *ngIf="!isLoading" class="btn btn-secondary mt-2 ms-2" data-bs-toggle="modal" data-bs-target="#deleteCatModal">Delete</button>
+                                            <button type="button" *ngIf="!isLoading" class="btn btn-secondary mt-2 ms-2" data-bs-toggle="modal" data-bs-target="#deleteCatModal" (click)="deleteBuffer()">Delete</button>
                                             <button type="submit" *ngIf="!isLoading" class="btn btn-edit mt-2 ms-2">Edit</button>
                                             <button type="button" *ngIf="isLoading" class="btn btn-secondary mt-2 ms-2">Loading..</button>
                                           </div>
