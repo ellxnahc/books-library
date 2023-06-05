@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
 
   
   openDetail(id:string){
-    this.router.navigate(['/admin/books-management/book-details',id]);
+    this.router.navigate(['/book-details',id]);
   }ngOnDestroy(){}
 
   fetchData(){

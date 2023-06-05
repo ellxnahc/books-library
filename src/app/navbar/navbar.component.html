@@ -21,7 +21,7 @@
   </div>
 </nav> -->
 <nav class="navbar navbar-expand-custom navbar-mainbg">
-  <a class="navbar-brand navbar-logo ms-3" style="cursor: pointer;">Library Management</a>
+  <a class="navbar-brand navbar-logo ms-3" style="cursor: pointer;" routerLink="/">Library Management</a>
   <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
     aria-label="Toggle navigation">
     <i class="fas fa-bars text-white"></i>
@@ -35,11 +35,11 @@
         <li *ngIf="isLogin&&isAdmin">
           <a routerLinkActive="backgroundBtn" type="button" routerLink="/admin/books-management"
             [routerLinkActiveOptions]="{exact:
-              true}"><i class="fa fa-sign-in"></i>Books</a>
+              true}"><i class="fa fa-book"></i>Books</a>
         </li>
         <li *ngIf="isLogin&&isUser">
           <a routerLinkActive="backgroundBtn" type="button" routerLink="/user/books" [routerLinkActiveOptions]="{exact:
-            true}"><i class="fa fa-sign-in"></i>Books</a>
+            true}"><i class="fa fa-book"></i>Books</a>
         </li>
         <li *ngIf="isLogin&&isAdmin">
           <a routerLinkActive="backgroundBtn" type="button" routerLink="admin/borrowed-management"
@@ -48,20 +48,20 @@
         </li>
         <li *ngIf="isLogin&&isUser">
           <a routerLinkActive="backgroundBtn" type="button" routerLink="/user/borrowed-list" [routerLinkActiveOptions]="{exact:
-            true}"><i class="fa fa-id-card"></i>Borrowed List</a>
+            true}"><i class="fa fa-list-ul"></i>Borrowed List</a>
         </li>
         <li *ngIf="isLogin&&isAdmin">
           <a routerLinkActive="backgroundBtn" type="button" routerLink="/admin/category-management"
             [routerLinkActiveOptions]="{exact:
-                true}"><i class="fa fa-id-card"></i>Category</a>
+                true}"><i class="fa fa-list-ul"></i>Category</a>
         </li>
         <li *ngIf="isLogin&&isAdmin">
           <a routerLinkActive="backgroundBtn" type="button" routerLink="/admin/user-management" [routerLinkActiveOptions]="{exact:
-                true}"><i class="fa fa-id-card"></i>User</a>
+                true}"><i class="fa fa fa-users"></i>User</a>
         </li>
         <li *ngIf="isLogin">
           <a routerLinkActive="backgroundBtn" type="button" (click)="logOut()" [routerLinkActiveOptions]="{exact:
-                true}"><i class="fa fa-id-card"></i>Logout</a>
+                true}"><i class="fa fa-sign-in"></i>Logout</a>
         </li>
       </div>
     </ul>

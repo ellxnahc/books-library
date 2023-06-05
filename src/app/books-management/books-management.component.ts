@@ -98,7 +98,11 @@ export class BooksManagementComponent implements OnInit {
 
 
   openDetail(id: string) {
-    this.router.navigate(['/admin/books-management/book-details', id]);
+    if(this.authService.userRole===1){
+      this.router.navigate(['/admin/books-management/book-details', id]);
+    }else{
+      this.router.navigate(['/user/books/book-details', id]);
+    }
   }
 
   ngOnDestroy() { }

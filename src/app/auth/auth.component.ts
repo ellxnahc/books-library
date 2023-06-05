@@ -63,11 +63,12 @@ export class AuthComponent {
             this.user=localStorage.getItem('userData');
             if(JSON.parse(this.user).email=="knowryadmin@gmail.com" || JSON.parse(this.user).email=="aewinj@gmail.com"){
               this.authService.userRole=UserRole.Admin;
+              this.router.navigate(['/admin/books-management'])
             }else{
               this.authService.userRole=UserRole.NormalUser;
+              this.router.navigate(['/user/books'])
             }
             console.log(this.authService.userRole);
-            this.router.navigate(['/admin/books-management'])
           },
           error: error =>{
             this.isLoading=false;
