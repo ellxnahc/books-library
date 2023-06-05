@@ -56,7 +56,7 @@
                 true}"><i class="fa fa-id-card"></i>Category</a>
         </li>
         <li *ngIf="isLogin&&isAdmin">
-          <a routerLinkActive="backgroundBtn" type="button" [routerLinkActiveOptions]="{exact:
+          <a routerLinkActive="backgroundBtn" type="button" routerLink="/admin/user-management" [routerLinkActiveOptions]="{exact:
                 true}"><i class="fa fa-id-card"></i>User</a>
         </li>
         <li *ngIf="isLogin">

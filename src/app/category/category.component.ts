@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { debounceTime, defer, distinctUntilChanged, map, merge, Observable, of, startWith, Subscription } from 'rxjs';
 import { BookCategory, Category } from '../model/category.model';
 import { CategoryManagementService } from '../service/category-management.service';
 
@@ -20,6 +20,8 @@ export class CategoryComponent implements OnInit{
     categoryName: '',
   };
   $catSubscriptionFetch : Subscription = Subscription.EMPTY;
+  temp: any;
+  categoryDataTemp: BookCategory[];
 
   constructor(
     private catManagementService:CategoryManagementService,
@@ -28,12 +30,36 @@ export class CategoryComponent implements OnInit{
   ) {}
 
   ngOnInit(){
+    this.searchControl = this.formBuilder.control("");
+    this.areMinimumCharactersTyped$ = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      map((searchString) => searchString.length >= 0)
+    );
+
+    const searchString$ = merge(
+      defer(() => of(this.searchControl.value)),
+      this.searchControl.valueChanges
+    ).pipe(debounceTime(300), distinctUntilChanged());
+    this.isLoading = true;
+
+    
+
     this.$catSubscriptionFetch = this.catManagementService.fetchCategory().
       subscribe((data:any)=>{
         console.log(data)
         this.categoryData = data.category;
+        this.categoryDataTemp = data.category;
         this.isLoading = false;
       });
+
+    searchString$.subscribe(value => {
+      this.categoryData = [];
+      this.temp = this.categoryDataTemp.filter((data:any) => {
+        if (data.categoryName.toLowerCase().includes(value.toLowerCase())) {
+          this.categoryData.push(data);
+        }
+      })
+    })
   }
 
   ngOnDestroy(){}

@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { BookBorrowedListComponent } from './book-borrowed-list/book-borrowed-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
     DashboardComponent,
     CategoryComponent,
     BookBorrowedListComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

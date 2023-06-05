@@ -1,0 +1,43 @@
+<div class="alerts">
+    <alert *ngIf="alertMsg!=''"  type="success" dismissOnTimeout="3000" >{{alertMsg}}</alert>
+</div>
+<div class="modal" class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <div class="form-group has-search ms-3 float-left ">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input class ="form-control" type="text" value="" [formControl]="searchControl"/>
+        </div>
+        <!-- <div>
+            <button type="button" class="btn hover-edit" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fas fa-plus"></i>&nbsp; Add User</button>
+        </div> -->
+    </div>
+</div>
+<div class="container" *ngIf="!isLoading">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Role</th>
+                <!-- <th scope="col">Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let col of userData; index as i;">
+                <td>{{i+1}}</td>
+                <td>{{col.id}}</td>
+                <td>{{col.email.split('@')[0]}}</td>
+                <td>{{col.email}}</td>
+                <td>{{col.password}}</td>
+                <td>{{col.roleStatus}}</td>
+                <!-- <td>
+                  <button type="button" class="edit-btn"><i
+                  class="fas fa-pencil"></i></button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>

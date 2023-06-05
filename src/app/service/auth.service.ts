@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { BehaviorSubject, Subject, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-import { AuthRequestData, AuthResponseData, UserData } from "../model/auth";
+import { catchError, tap, map } from "rxjs/operators";
+import { AuthRequestData, AuthResponseData, UserData, UserDataArray } from "../model/auth";
 import { User } from '../model/user.model';
 
 enum UserRole{
@@ -117,5 +117,18 @@ export class AuthService {
     }
     this.userRole=UserRole.Guess;
     this.tokenExpirationTimer = null;
+  }
+
+  fetchUser() {
+    return this.http.get<{ [key: string]: UserData }>(this.userUrl).pipe
+      (map(responseData => {
+        let postArray: UserDataArray = { user: [] };
+        for (const key in responseData) {
+          if (responseData.hasOwnProperty(key)) {
+            postArray.user.push({ ...responseData[key], id: key })
+          }
+        }
+        return postArray;
+      }))
   }
 }

@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { BookBorrowedListComponent } from './book-borrowed-list/book-borrowed-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,9 @@ const routes: Routes = [
   },
   {
     path: 'admin/borrowed-management', component: BookBorrowedListComponent
+  },
+  {
+    path: 'admin/user-management', component: UserManagementComponent
   },
   // {
   //   path: 'register', component: RegisterComponent,

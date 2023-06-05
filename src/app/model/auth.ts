@@ -59,3 +59,7 @@ export class UserData{
     }
   }
 }
+
+export interface UserDataArray {
+  user: UserData[]
+}
