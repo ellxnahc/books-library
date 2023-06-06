@@ -80,8 +80,9 @@ export class BookDetailComponent {
       writer: form.inputWriter,
       picture: form.inputPicture,
       description: form.inputDescription,
-      borowedStatus: false
+      borowedStatus: this.bookDisplayDetail.borowedStatus
     }
+
     this.booksManagementService.editBook(this.bookDisplayDetail, this.booksId).subscribe(data=>{
       this.alertMsg= 'Data has been saved'
       this.isLoading = false;
@@ -89,7 +90,6 @@ export class BookDetailComponent {
       const closeModal = document.getElementById('closeEditBookModal');
       closeModal?.click();
     });
-
   }
 
 
