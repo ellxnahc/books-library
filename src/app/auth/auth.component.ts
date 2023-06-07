@@ -92,7 +92,8 @@ export class AuthComponent {
               id : data.localId,
               email: data.email,
               password: password,
-              role: 2
+              role: 2,
+              idToken: data.idToken
             }
             this.postUserData = obj;
             this.authService.addToDB(this.postUserData).subscribe((dt:any)=>{this.errorMsg=''})

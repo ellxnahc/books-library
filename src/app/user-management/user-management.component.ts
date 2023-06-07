@@ -18,7 +18,7 @@ export class UserManagementComponent implements OnInit {
   public areMinimumCharactersTyped$: Observable<boolean>| undefined;
   public searchControl!: FormControl;
   temp: any;
-  userDataTemp: any;
+  userDataTemp: any=[];
   alertMsgDel:any='';
   dataToBeDeleted:any=[];
 
@@ -64,15 +64,21 @@ export class UserManagementComponent implements OnInit {
     console.log(data);
   }
 
-  deleteUser(id:any){
+  deleteUser(delData:any){
     this.isLoading = true;
-    this.authService.deleteUser(id).subscribe((data:any)=>{
-      this.alertMsgDel = 'User has been deleted'
-      setTimeout(()=>{window.location.reload}, 2000)
-      this.isLoading = false;
-      const closeModal = document.getElementById('closeDeleteUserModal');
-      closeModal?.click();
+    this.authService.deleteFromDB(delData).subscribe((data:any)=>{
+      this.authService.deleteUser(delData).subscribe((dt:any)=>{
+        this.alertMsgDel = 'User has been deleted'
+        this.isLoading = false;
+        setTimeout(()=>{window.location.reload()}, 2000)
+        const closeModal = document.getElementById('closeDeleteUserModal');
+        closeModal?.click();
+      })
+      
     })
+  }
+  delWithAPI(data:any){
+    
   }
 
 }

@@ -46,7 +46,8 @@ export class UserData{
   uid?:string;
   email: string;
   password: string;
-  role: number
+  role: number;
+  idToken?: string;
 
   constructor(object?: any){
     if (object) {
@@ -55,6 +56,7 @@ export class UserData{
       if(object.uid) this.uid = object.uid;
       if(object.password) this.password = object.password;
       if(object.role) this.role = object.role;
+      if(object.idToken) this.idToken = object.idToken;
       for (var prop in object) {
         prop = object[prop];
       }

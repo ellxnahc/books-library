@@ -132,15 +132,27 @@ export class AuthService {
       }))
   }
 
-  deleteUser(id:string){
+  deleteUser(data:any){
+    
+    
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyDGkxMOJ19OJ25UeDxAFHn0kU-c3LTk8a4',
+        {
+            idToken: data.idToken
+        }
+    )
+    
+  }
+
+  deleteFromDB(datas: any){
     const data = {
-      [id] :{
+      [datas.uid] :{
         email: null,
         id: null,
         password:null,
-        role: null
+        role: null,
+        idToken: null
       }
     }
     return this.http.patch(this.userUrl, data);
-  }
+}
 }
