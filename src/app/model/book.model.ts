@@ -50,7 +50,7 @@ export interface BookDisplayDetail {
     title: string,
     picture: string,
     description: string,
-    borowedStatus: boolean
+    borowedStatus?: boolean
 }
 
 export interface BooksData {

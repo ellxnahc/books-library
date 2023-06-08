@@ -9,7 +9,7 @@
                     <div class="shadow-risen card container rounded">
                         <div class="row">
                             <img src="{{bookDisplayDetail.picture}}" style=" object-fit: contain;"
-                                    class="card-img-left col-4" style="height:32rem; width: auto;" alt="..."/>
+                                    class="card-img-left col-4" style="height:32rem; min-width: 379px; max-width: 500px;" alt="..."/>
                             <div class="card-body col-8">
                                 <div class="d-flex row">
                                     <div class="card-body mb-1">
@@ -66,16 +66,17 @@
                                         <option *ngFor="let inside of showCat; index as i" [value]="inside.categoryName">{{inside.categoryName}}</option>
                                     </select>
                                 </div>
+                                <br>
                             <!-- Writer input -->
                                 <label class="form-label pb-1" for="inputWriter">Writer Name</label>
                                 <input [(ngModel)]="bookDisplayDetail.writer" type="text" id="inputWriter" name="inputWriter" class="form-control"/>
                                 <br>
-                            <!-- Picture input -->
+                            <!-- Url Pic input -->
                                 <label class="form-label pb-1" for="inputPicture">Picture (url)</label>
                                 <input [(ngModel)]="bookDisplayDetail.picture" type="text" id="inputPicture" name="inputPicture" class="form-control"/>
                                 <br>
-                            <!-- Commit message input-->
-                                <label class="form-label pb-1" for="inputDescription">Config File Content:</label>
+                            <!-- Desc input-->
+                                <label class="form-label pb-1" for="inputDescription">Description:</label>
                                 <textarea [(ngModel)]="bookDisplayDetail.description" id="inputDescription" name="inputDescription"  rows="4" col="5" class="form-control"></textarea>
                                 <br>
                             <!-- Submit button -->

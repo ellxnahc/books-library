@@ -53,21 +53,12 @@
                 </div>
                 <div class="modal-body">
                     <form class="card px-2 pt-1 pb-3 d-flex" #f="ngForm" (ngSubmit)="addBook(f.value)">
-                        <!-- <div  class="alert warnaAlert" style="width: 80%;">
-                                    Invalid Username or Password
-                                </div>
-                                <div class="alert warnaAlert" style="width: 80%;">
-                                Invalid Edit Config
-                            </div>
-                                <div class="alert warnaAlert" style="width: 80%;">
-                                    Data not filled
-                                </div> -->
-                        <!-- Email input -->
+                        <!-- Book Title input -->
                         <label class="form-label pb-1" for="inputTitle">Book Title</label>
                         <input ngModel type="text" id="inputTitle" name="inputTitle" class="form-control" />
                         <br>
                         <!-- Category input -->
-                        <label class="form-label pb-1" for="inputCategory">Choose Config Service Changes to add:</label>
+                        <label class="form-label pb-1" for="inputCategory">Category:</label>
                         <div class="d-flex justify-content-end">
                             <select [(ngModel)]="addData" id="inputCategory" name="inputCategory" class="form-control"
                                 aria-placeholder="selected-path">
@@ -75,16 +66,17 @@
                                 </option>
                             </select>
                         </div>
+                        <br>
                         <!-- Writer input -->
                         <label class="form-label pb-1" for="inputWriter">Writer Name</label>
                         <input ngModel type="text" id="inputWriter" name="inputWriter" class="form-control" />
                         <br>
-                        <!-- Password input -->
+                        <!-- Url Pic input -->
                         <label class="form-label pb-1" for="inputPicture">Picture (url)</label>
                         <input ngModel type="text" id="inputPicture" name="inputPicture" class="form-control" />
                         <br>
-                        <!-- Commit message input-->
-                        <label class="form-label pb-1" for="inputDescription">Config File Content:</label>
+                        <!-- Desc input-->
+                        <label class="form-label pb-1" for="inputDescription">Description:</label>
                         <textarea ngModel id="inputDescription" name="inputDescription" rows="4"
                             class="form-control"></textarea>
                         <br>

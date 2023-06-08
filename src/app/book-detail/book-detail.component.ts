@@ -13,7 +13,14 @@ import { CategoryManagementService } from '../service/category-management.servic
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent {
-  bookDisplayDetail:BookDisplayDetail;
+  bookDisplayDetail:BookDisplayDetail= {
+    category: '',
+    writer: '',
+    title:'',
+    picture:'',
+    description:'',
+  };;
+  
   $paramSubs:Subscription = Subscription.EMPTY;
   $bookDetailSubscriptionFetch : Subscription = Subscription.EMPTY
   booksId:string;
